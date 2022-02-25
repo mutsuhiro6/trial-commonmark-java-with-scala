@@ -10,6 +10,8 @@ import org.commonmark.renderer.html.HtmlRenderer.HtmlRendererExtension
 object Transformer:
   def apply(): Transformer = new Transformer
 
+/** Transforming Markdown text content to HTML document.
+  */
 class Transformer:
 
   import scala.jdk.CollectionConverters._
