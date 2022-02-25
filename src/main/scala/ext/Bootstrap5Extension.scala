@@ -1,3 +1,5 @@
+package ext
+
 import org.commonmark.renderer.html.HtmlNodeRendererContext
 import org.commonmark.renderer.html.HtmlWriter
 import org.commonmark.renderer.NodeRenderer
@@ -82,10 +84,8 @@ class Bootstrap5StyledAttributeProvider(
       case _: TableBlock => attributes.put("class", tableAttrs.mkString(" "))
       case cell: TableCell if cell.isHeader => attributes.put("scope", "col")
       case blockquote: BlockQuote => attributes.put("class", "blockquote")
-      case img: Image =>
-        if !imageAttrs.isEmpty then
-          attributes.put("class", imageAttrs.mkString(" "))
-      case _ => // do nothing
+      case img: Image => attributes.put("class", imageAttrs.mkString(" "))
+      case _          => // do nothing
 
 case class Bootstrap5TableOptions(
     responsible: Boolean,

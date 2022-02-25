@@ -1,19 +1,14 @@
-import org.commonmark.node.AbstractVisitor
-import org.commonmark.node.Text
-import org.commonmark.node.Node
+import ext._
+import api._
+
 @main def hello: Unit =
   val source = scala.io.Source.fromFile("inputs/test.md")
   val content = source.getLines.mkString("\n")
-  val document = GitHubFlavoredTransformer.transform(content)
+  val bootstrap5 = Bootstrap5Extension
+  bootstrap5.configure(Bootstrap5TableOptions(true, false, true, false, Set()))
+  bootstrap5.configure(Bootstrap5ImageOptions(false, true, false, Set()))
+  val trn = Transformer()
+  val document = trn.using(GitHubFlavor()).using(bootstrap5).using(MermaidExtension).parse(content)
   val pw = new java.io.PrintWriter("output.html")
-  pw.println(document)
+  pw.print(trn.render(document))
   pw.close
-  //document.accept(Visitor)
-
-object Visitor extends AbstractVisitor:
-
-  override def visit(node: Text): Unit =
-    println(node)
-    visitChildren(node)
-
-    
