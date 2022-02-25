@@ -8,7 +8,10 @@ import org.commonmark.node.FencedCodeBlock
 import org.commonmark.renderer.html.HtmlRenderer
 import org.commonmark.renderer.html.HtmlNodeRendererFactory
 
-class MermaidRenderer(context: HtmlNodeRendererContext) extends NodeRenderer:
+/** Renders fenced-code-blocks following highlight.js and mermaid.js semantics.
+  */
+class MyFencedCodeBlockRenderer(context: HtmlNodeRendererContext)
+    extends NodeRenderer:
 
   import scala.jdk.CollectionConverters._
 
@@ -42,19 +45,22 @@ class MermaidRenderer(context: HtmlNodeRendererContext) extends NodeRenderer:
         if space == -1 then info
         else info.substring(0, space)
       attributes += "class" -> s"language-$language"
-      writer.line()
-      writer.tag("pre", Map.empty[String, String].asJava)
-      writer.tag("code", attributes.asJava)
-      writer.text(literal)
-      writer.tag("/code")
-      writer.tag("/pre")
-      writer.line()
+      if info == "nohighlight" then attributes += "class" -> "nohighlight"
+    writer.line()
+    writer.tag("pre", Map.empty[String, String].asJava)
+    writer.tag("code", attributes.asJava)
+    writer.text(literal)
+    writer.tag("/code")
+    writer.tag("/pre")
+    writer.line()
 
-object MermaidExtension extends HtmlRenderer.HtmlRendererExtension:
+/** Extension for using highlight.js and mermaid.js.
+  */
+object MyFencedCodeBlockExtension extends HtmlRenderer.HtmlRendererExtension:
 
   override def extend(builder: HtmlRenderer.Builder): Unit =
     builder.nodeRendererFactory {
       new HtmlNodeRendererFactory():
         override def create(context: HtmlNodeRendererContext): NodeRenderer =
-          new MermaidRenderer(context)
+          new MyFencedCodeBlockRenderer(context)
     }
