@@ -4,7 +4,7 @@ date: "2022-02-25"
 author: "Mutsuhiro Iwamoto"
 ---
 
-# Testほげ
+# Test ほげ
 
 Hello world! This is a Test.
 
@@ -23,6 +23,12 @@ object PlaintextTest:
 ```
 
 ```
+object AutohighligtTest:
+    val test = "test"
+    println(test)
+```
+
+```nohilight
 object NohighligtTest:
     val test = "test"
     println(test)
@@ -36,18 +42,23 @@ graph TD;
     C-->D;
 ```
 
-|  TH  |  TH  |
-| ---- | ---- |
-|  TD  |  TD  |
-|  TD  |  TD  |
+| TH  | TH  |
+| --- | --- |
+| TD  | TD  |
+| TD  | TD  |
 
 - Test1
+  - Nested list
 - Test2
 
 1. Test
 2. Test
 
+- [ ] task1
+- [x] task2
+  - [ ] task2-1
+  - [x] task2-2
+
 This is a `Hello World` Test markdown.
 
 ![Alter Text](/images/hoge.png)
-
