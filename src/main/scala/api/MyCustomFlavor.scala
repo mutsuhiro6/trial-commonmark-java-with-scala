@@ -6,4 +6,4 @@ import ext._
 
 object MyCustomFlavor:
   def apply(): Seq[Extension] =
-    Seq(MermaidExtension, Bootstrap5Extension, InsExtension.create)
+    Seq(MyFencedCodeBlockExtension, Bootstrap5Extension, InsExtension.create)
