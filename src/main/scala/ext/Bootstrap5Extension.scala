@@ -16,6 +16,9 @@ import org.commonmark.ext.gfm.tables.TableBody
 import org.commonmark.ext.gfm.tables.TableCell
 import org.commonmark.node.BlockQuote
 import org.commonmark.node.Image
+import org.commonmark.ext.task.list.items.TaskListItemMarker
+import org.commonmark.node.ListItem
+import org.commonmark.node.ListBlock
 
 object Bootstrap5Extension extends HtmlRenderer.HtmlRendererExtension:
 
@@ -85,7 +88,9 @@ class Bootstrap5StyledAttributeProvider(
       case cell: TableCell if cell.isHeader => attributes.put("scope", "col")
       case blockquote: BlockQuote => attributes.put("class", "blockquote")
       case img: Image => attributes.put("class", imageAttrs.mkString(" "))
-      case _          => // do nothing
+      case task: TaskListItemMarker =>
+        attributes.put("class", "form-check-input")
+      case _ => // do nothing
 
 case class Bootstrap5TableOptions(
     responsible: Boolean,
